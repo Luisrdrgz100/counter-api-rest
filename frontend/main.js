@@ -20,16 +20,13 @@ document.addEventListener('DOMContentLoaded', function () {
     ////////////
 
     // listener for incremente
-    document.querySelector('header .increment').addEventListener('click', () => {
+    document.querySelector('.newBotons .increm').addEventListener('click', () => {
         // increment counter
-
-
         fetch(baseApiUrl + '/increment')
             .then(res => res.json())
             .then(data => {
                 updateCounterDOM(data.counterValue)
             })
-
     })
     document.querySelector('.newBotons .decrem').addEventListener('click', () => {
         fetch(baseApiUrl + '/decrement')
