@@ -18,11 +18,16 @@ app.use(function (req, res, next) {
     next();
 });
 
+
+
 app.get('/data', (req, res) => {
+
     const jsonString = fs.readFileSync('./db.json', 'UTF-8');
     const data = JSON.parse(jsonString);
     res.json(data);
+
 })
+// READ JSON FROM ROM
 
 app.get('/increment', (req, res) => {
     const jsonString = fs.readFileSync('./db.json', 'UTF-8');
@@ -36,8 +41,37 @@ app.get('/decrement', (req, res) => {
     const jsonString = fs.readFileSync('./db.json', 'UTF-8');
     const data = JSON.parse(jsonString);
     data.counterValue -= 1;
-    fs.writeFileSync('./db.json', JSON.stringify(data))
-    console.log(res.json(data));
+
+    fs.writeFileSync('/db.json', JSON.stringify(data))
+    res.json(data);
 })
+
+app.get('/incrementBy/:amount', (req, res) => {
+
+    // READ JSON FROM ROM
+    const jsonString = fs.readFileSync('./db.json', 'UTF-8');
+    const data = JSON.parse(jsonString);
+
+
+    let amount = Number(req.params.amount)
+    if (isNaN(amount)) {
+        res.status(500).json({
+            message: 'UPS :('
+        })
+        return;
+    }
+    // UPDATE DATA ON RAM
+    data.counterValue += amount;
+
+    // WRITE BACK THE DATA TO ROM
+    fs.writeFileSync('./db.json', JSON.stringify(data));
+
+    res.json(data);
+
+})
+
+
+
+
 
 app.listen(port, () => console.log('Servidor levantado en ' + port));
