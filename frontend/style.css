@@ -7,8 +7,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 30vh;
-    justify-content: center;
-    align-content: center;
+
 }
 
 header {
@@ -19,10 +18,39 @@ header {
 }
 
 main {
-    flex: 1;
-    background: grey;
+    display: grid;
+    grid-template-columns: 35px 100px 35px;
+    grid-template-rows: 20vw;
+    background: rgb(121, 13, 97);
     color: white;
     padding: 1em;
+    align-self: center;
+    justify-items: center;
+    border-radius: 20px;
 
+}
 
+.counter {
+    border-radius: 10px;
+    font-size: 35px;
+    color: yellow;
+}
+
+.counter:hover {
+    font-size: 38px;
+}
+
+.newBotons {
+    align-self: flex-end;
+}
+
+.newBotons button {
+    border-radius: 50px;
+    background-color: rgb(17, 19, 158);
+    color: rgb(235, 230, 164);
+    font-size: 18px;
+}
+
+.newBotons button:hover {
+    opacity: 0.4;
 }
