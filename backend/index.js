@@ -40,4 +40,14 @@ app.get('/decrement', (req, res) => {
     console.log(res.json(data));
 })
 
+app.get('/incrementBy/:amount', (req, res) => {
+    const jsonString = fs.readFileSync('./db.json', 'UTF-8');
+    const data = JSON.parse(jsonString);
+
+    let amont = Number(req.params.amount)
+    data.counterValue += amont;
+    fs.writeFileSync('./db.json', JSON.stringify(data));
+    res.json(data);
+})
+
 app.listen(port, () => console.log('Servidor levantado en ' + port));
